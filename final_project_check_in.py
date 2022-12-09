@@ -11,7 +11,7 @@ class Reservations:
         first_class(str): First class on the plane
     """
     
-    def __init__(self, seats, coach, business, first_class):
+    def __init__(self, seat_id, accomodation, service_class, seat_preference, seat_prices):
     
         """Initializes a seat object
 
@@ -25,16 +25,31 @@ class Reservations:
 	        Ctreates and sets the attributes of the Reservations class
         """
         
-    def available_subcatogory(self, seats):
+        seat_data = pd.read_csv("flight 201 seating chart.csv")
         
-        """Creates a list of available seats within all the categories
+        seat_id = seat_data["seat_id"]
+        accomodation = seat_data["accomodation"]
+        service_class = seat_data["service_class"]
+        seat_preference = seat_data["seat_preference"]
+        seat_prices = seat_data["seat_prices"]
+        
+        self.seat_id = seat_id
+        self.accomodation = accomodation
+        self.service_class = service_class
+        self.seat_preference = seat_preference
+        self.seat_prices = seat_prices
 
-	    Args:
-		    seats(int): number of seats available 
+    
+    #def available_subcatogory(self, seats):
+        
+        #"""Creates a list of available seats within all the categories
 
-	    Side Effects:
-		    Creates an updated list of seats within different categories
-        """
+	    #Args:
+		    #seats(int): number of seats available 
+
+	    #Side Effects:
+		    #Creates an updated list of seats within different categories
+        #"""
         
     def reserve_seat(self, seats, users):
         """Append users to the available empty list of seats
@@ -67,9 +82,10 @@ class Reservations:
 
         Side Effects:
 	        Concatenates both data frames together
+         
+         
         """
-        
-
+    # seat_id, boarder order, name, location
 
 class Passenger:
     """Declaration of a Passenger class that accounts for passenger information such as name, date of birth, whether the person has accommodations, what service class they belong to, and their preference of seat within the row.
@@ -83,7 +99,7 @@ class Passenger:
 	    seat_preference(str): The users preferred seat
     """
     
-    def __init__(self, name, dob, accommodation_status, service_class, seat_preference):
+    def __init__(self, name, dob, accommodation, service_class, seat_preference, price):
         """Current booking with Customer information
 
 	    Args:
@@ -94,6 +110,15 @@ class Passenger:
 	        service_class(str): The service class section of the airplane where the user will be seated.
 	        seat_preference(str): The preference in the seat the user wants
         """
+        #connecting flights, 
+        
+        self.name = name
+        self.dob = dob
+        self.accomodation = accommodation
+        self.service_class = service_class
+        self.seat_preference = seat_preference
+        self.price = price
+        
 
     def Flight_Booking(filepath):
         """reads a data file and place it into a dataframe
@@ -103,16 +128,69 @@ class Passenger:
     
         Side effect:
         Reads data file and appends it to a dataframe"""
-
-    def seat_filter(self, seats):
-        """Uses pandas to filter a table of seats
         
-        Args:
-            seats(int): number of seats available
+        filepath = pd.read_csv("flight 201 seating chart.csv")
+        
+
+    #def seat_filter(self, seats):
+        #"""Uses pandas to filter a table of seats
+        
+        #Args:
+            #seats(int): number of seats available
 	
-	    Side Effects: 
-        Sets a new filtered table of seats
-        """
+	    #Side Effects: 
+        #Sets a new filtered table of seats
+        #"""
+        
+    def age_filter(filepath):
+        
+        # access the file path
+        # reads the user inputted age (Format: "year/mm/dd")
+        # uses regex to a determine whether a passenger is over the age of 14
+        # If under the age of 14 "You cant fly alone"
+        
+        filepath = pd.read_csv("flight 201 seating chart.csv")
+        
+        dob = input("what is your date of birth? Format: year")
+
+        
+        age_regex = re.search(r"^\d{4}", dob)
+        
+        age = int(age_regex)
+        
+        if 2022 - age >= 14:
+            print(f"The user is {age} years old, they are able to purchase a ticket")
+            
+        if 2022 - age < 14:
+            print(f"The user is {age} years old, they are too young to purchase a ticket")
+        
+        
+    def accomodation_filter():
+        
+        #access the filepath
+        #read the user input of desired accomodation 
+        #if accomodation is need, accomodation seats will be displayed to choose from, accomodation seats will cost less
+        #if not, all seats will be displayed
+        
+        
+        
+    def service_class_filter():
+        
+        #access the filepath
+        #read the user input of desired service class
+        #conditional will display available seats based on desired service class (F, B, C)
+        
+    def seat_preference_filter():
+        
+        #access the filepath
+        #read the user input of desired seat_preference
+        #conditional will display available seats based on desired seat_preference (A, M, W)
+        
+    def price_filter():
+        
+        #access the filepath
+        #read the user input of budget
+        #conditional will display available seats within the maximum budget
         
     def main(filepath, available_seats, available_subcategory):
         """Merges the information from class person and class reservation
