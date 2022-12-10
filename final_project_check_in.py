@@ -182,19 +182,46 @@ class Passenger:
             print(all_seats)
             
         
-    def service_class_filter():
+    def service_class_filter(self):
         
         #access the filepath
         #read the user input of desired service class
         #conditional will display available seats based on desired service class (F, B, C)
+        #Help: Accomadation and pricing 
+        #If budget input is 80 and the user needs an accomadation, the user cannot afford the ticket
         
+        seat_data = pd.read_csv("flight 201 seating chart.csv")
+        price = input("What's the most you're willing to spend on this ticket?")
+        if price < 69:
+            print("There are no available seats within that price range")
+        elif price < 100:
+            priced_seats = seat_data[(seat_data["price"]<self.price) & (seat_data["seat_id"]) & (seat_data["service_class"])]
+            print(priced_seats)
+            print("Here are seats within your budget. You're only able to purchase coach")
+        elif price < 360:
+            priced_seats = seat_data[(seat_data["price"]<self.price) & (seat_data["seat_id"]) & (seat_data["service_class"])]
+            print(priced_seats)
+            print("Here are seats within your budget. You're able to purchase either coach or buisness")
+        elif price < 1400:
+            priced_seats = seat_data[(seat_data["price"]<self.price) & (seat_data["seat_id"]) & (seat_data["service_class"])]
+            print(priced_seats)
+            print("Here are seats within your budget. You're able to purchase coach, buisness, or first class")
+        else:
+            priced_seats = seat_data[(seat_data["price"]) & (seat_data["seat_id"]) & (seat_data["service_class"])]
+            print(priced_seats)
+            print("Here are seats within your budget")
+            
+        
+            
+            
+            
     def seat_preference_filter():
         
         #access the filepath
         #read the user input of desired seat_preference
         #conditional will display available seats based on desired seat_preference (A, M, W)
         
-    def price_filter():
+    def __repr__():
         
         #access the filepath
         #read the user input of budget
