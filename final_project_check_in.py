@@ -220,12 +220,28 @@ class Passenger:
         #access the filepath
         #read the user input of desired seat_preference
         #conditional will display available seats based on desired seat_preference (A, M, W)
+        seat_data = pd.read_csv("flight 201 seating chart.csv")
+        preference = input("Would you like a middle, aisle, or window seat? Middle(M), Aisle(A), Window(W). Asile is reserved for accomodations and has a higher price point")
+        if preference == "M":
+            perfered_seats = seat_data[(seat_data["seat_preference"] == "M") & (seat_data["seat_id"])]
+            print(perfered_seats)
+            print("Here are all the middle seats available")
+        if preference == "A":
+            perfered_seats = seat_data[(seat_data["seat_preference"] == "A") & (seat_data["seat_id"])]
+            print(perfered_seats)
+            print("Here are all the Aisle seat available")
+        if preference == "W":
+            perfered_seats = seat_data[(seat_data["seat_preference"] == "W") & (seat_data["seat_id"])]
+            print(perfered_seats)
+            print("Here are all the window seats available")
         
-    def __repr__():
         
-        #access the filepath
-        #read the user input of budget
-        #conditional will display available seats within the maximum budget
+        
+        
+        
+        
+    def __repr__(self):
+        #Show final seat the user selects based on criteria they inputted.(Input values narrowed down)
         
     def main(filepath, available_seats, available_subcategory):
         """Merges the information from class person and class reservation
