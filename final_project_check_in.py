@@ -111,7 +111,7 @@ class Passenger:
 	        seat_preference(str): The preference in the seat the user wants
         """
         #connecting flights, 
-        
+        seat_data = pd.read_csv("flight 201 seating chart.csv")
         self.name = name
         self.dob = dob
         self.accomodation = accommodation
@@ -165,14 +165,22 @@ class Passenger:
             print(f"The user is {age} years old, they are too young to purchase a ticket")
         
         
-    def accomodation_filter():
+    def accomodation_filter(self):
         
         #access the filepath
         #read the user input of desired accomodation 
         #if accomodation is need, accomodation seats will be displayed to choose from, accomodation seats will cost less
         #if not, all seats will be displayed
-        
-        
+        seat_data = pd.read_csv("flight 201 seating chart.csv")
+
+        yaccomodation = input("Enter TRUE or FALSE to if you need accomodations:")
+        if yaccomodation == 'TRUE':
+            accomodated_seats = seat_data[(seat_data["accomodation"] == 'TRUE')and (seat_data["seat_id"])]
+            print(accomodated_seats)
+        else:
+            all_seats = seat_data[(seat_data["accomodation"])and (seat_data["seat_id"])]
+            print(all_seats)
+            
         
     def service_class_filter():
         
