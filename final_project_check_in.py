@@ -229,35 +229,53 @@ class Passenger:
             
         elif price < 100:
             priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
+<<<<<<< HEAD
             seats = seat_data[['seat_id', 'seat_prices', 'service_class ']]
             merged_seats = pd.merge(seats, priced_seats[['seat_id', 
                                 'seat_prices', 'service_class ']], how='right')
             print("Here are seats within your budget.\n"
                   "You're only able to purchase coach")
+=======
+            seats = seat_data[['seat_id', 'seat_prices', 'service_class']]
+            merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class']], how='right')
+            print("Here are seats within your budget. You're only able to purchase coach")
+>>>>>>> 4e76454de9d43eebfcbbfe8d37317a19d6940187
             print(merged_seats)
             
         elif price < 360:
             priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
+<<<<<<< HEAD
             seats = seat_data[['seat_id', 'seat_prices', 'service_class ']]
             merged_seats = pd.merge(seats, priced_seats[['seat_id', 
                                 'seat_prices', 'service_class ']], how='right')
             
             print("Here are seats within your budget.\n"
                   "You're able to purchase either coach or business")
+=======
+            seats = seat_data[['seat_id', 'seat_prices', 'service_class']]
+            merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class']], how='right')
+            print("Here are seats within your budget. You're able to purchase either coach or buisness")
+>>>>>>> 4e76454de9d43eebfcbbfe8d37317a19d6940187
             print(merged_seats)
             
         elif price < 1400:
             priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
+<<<<<<< HEAD
             seats = seat_data[['seat_id', 'seat_prices', 'service_class ']]
             merged_seats = pd.merge(seats, priced_seats[['seat_id', 
                                 'seat_prices', 'service_class ']], how='right')
             
             print("Here are seats within your budget.\n"
                   "You're able to purchase coach, business, or first class")
+=======
+            seats = seat_data[['seat_id', 'seat_prices', 'service_class']]
+            merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class']], how='right')
+            print("Here are seats within your budget. You're able to purchase coach, buisness, or first class")
+>>>>>>> 4e76454de9d43eebfcbbfe8d37317a19d6940187
             print(merged_seats)
             
         else:
-            seats = seat_data[['seat_id', 'seat_prices', 'service_class ']]
+            seats = seat_data[['seat_id', 'seat_prices', 'service_class']]
             print("Here are seats within your budget")
             print(seats)
             
