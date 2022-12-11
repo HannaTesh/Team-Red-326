@@ -152,16 +152,17 @@ class Passenger:
         filepath = pd.read_csv("flight 201 seating chart.csv")
         
         dob = input("what is your date of birth? Format: year")
-
         
         age_regex = re.search(r"^\d{4}", dob)
         
-        age = int(age_regex)
+        year = int(age_regex.group(0))
         
-        if 2022 - age >= 14:
+        age = 2022 - year
+        
+        if age >= 14:
             print(f"The user is {age} years old, they are able to purchase a ticket")
             
-        if 2022 - age < 14:
+        else:
             print(f"The user is {age} years old, they are too young to purchase a ticket")
         
         
@@ -190,30 +191,40 @@ class Passenger:
         #Help: Accomadation and pricing 
         #If budget input is 80 and the user needs an accomadation, the user cannot afford the ticket
         
-        seat_data = pd.read_csv("flight 201 seating chart.csv")
-        price = input("What's the most you're willing to spend on this ticket?")
+        seat_data = pd.read_csv("flight_seating.csv")
+        price_str = input("What's the most you're willing to spend on this ticket?")
+        price = int(price_str)
+        
         if price < 69:
             print("There are no available seats within that price range")
+            
         elif price < 100:
-            priced_seats = seat_data[(seat_data["price"]<self.price) & (seat_data["seat_id"]) & (seat_data["service_class"])]
-            print(priced_seats)
+            priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
+            seats = seat_data[['seat_id', 'seat_prices', 'service_class ']]
+            merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class ']], how='right')
             print("Here are seats within your budget. You're only able to purchase coach")
+            print(merged_seats)
+            
         elif price < 360:
-            priced_seats = seat_data[(seat_data["price"]<self.price) & (seat_data["seat_id"]) & (seat_data["service_class"])]
-            print(priced_seats)
+            priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
+            seats = seat_data[['seat_id', 'seat_prices', 'service_class ']]
+            merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class ']], how='right')
             print("Here are seats within your budget. You're able to purchase either coach or buisness")
+            print(merged_seats)
+            
         elif price < 1400:
-            priced_seats = seat_data[(seat_data["price"]<self.price) & (seat_data["seat_id"]) & (seat_data["service_class"])]
-            print(priced_seats)
+            priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
+            seats = seat_data[['seat_id', 'seat_prices', 'service_class ']]
+            merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class ']], how='right')
             print("Here are seats within your budget. You're able to purchase coach, buisness, or first class")
+            print(merged_seats)
+            
         else:
-            priced_seats = seat_data[(seat_data["price"]) & (seat_data["seat_id"]) & (seat_data["service_class"])]
-            print(priced_seats)
+            seats = seat_data[['seat_id', 'seat_prices', 'service_class ']]
             print("Here are seats within your budget")
+            print(seats)
             
         
-            
-            
             
     def seat_preference_filter():
         
