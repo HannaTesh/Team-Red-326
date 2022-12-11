@@ -1,102 +1,6 @@
 import pandas as pd
 import re
 
-<<<<<<< HEAD
-=======
-class Reservations:
-    """Declaration of a class that identifies seats that can be reserved within 
-       its sub categories: coach, business, first class
-
-    Attributes:
-        Seats (int):  number of seats available
-        coach(str): Coach class on the plane
-        business(str): Business class on the plane
-        first_class(str): First class on the plane
-    """
-    
-    def __init__(self, seat_id, accommodation, service_class, seat_preference, 
-                 seat_prices):
-    
-        """Initializes a seat object
-
-	    Args:
-            Seats (int):  number of seats available
-		    coach(str): Coach class on the plane
-		    business(str): Business class on the plane
-		    first_class(str): First class on the plane
-	
-	    Side Effects:
-	        Ctreates and sets the attributes of the Reservations class
-        """
-        
-        seat_data = pd.read_csv("flight 201 seating chart.csv")
-        
-        seat_id = seat_data["seat_id"]
-        accommodation = seat_data["accommodation"]
-        service_class = seat_data["service_class"]
-        seat_preference = seat_data["seat_preference"]
-        seat_prices = seat_data["seat_prices"]
-        
-        self.seat_id = seat_id
-        self.accommodation = accommodation
-        self.service_class = service_class
-        self.seat_preference = seat_preference
-        self.seat_prices = seat_prices
-
-    
-    #def available_subcategory(self, seats):
-        
-        #"""Creates a list of available seats within all the categories
-
-	    #Args:
-		    #seats(int): number of seats available 
-
-	    #Side Effects:
-		    #Creates an updated list of seats within different categories
-        #"""
-        
-    def reserve_seat(self, seats, users):
-        """Append users to the available empty list of seats
-        
-        Args:
-            Seats(int): Number of available seats
-		    Users(str): Users that will be appended to the empty seats
-
-        Side effects:
-	        Appends to a list of available seats
-        """
-        
-    def accommodate(self, accommodation_type):
-	    """Determines whether the customer is disable, pregnant or a 
-           senior citizen. Uses a regex to determine how old a user is and 
-           whether they are eligible for senior citizen status.
-
-	    Args:
-		    Accommodation_status(boolean): States whether a user has an 
-            accommodation or not 
-		    Accommodation_type(str): The type of accommodation a user possesses
-
-	    Side Effects:
-	    Sets self to a specific accommodation_status
-        """
-        
-    def finalized_booking(dataframe1, dataframe2):
-        """Pulls existing booking from the person class, and uses pandas to 
-           concatenate it to booking being upgraded. Can be used by the main 
-           function to finalize booking.
-        
-        Args:
-	        Dataframe1 (dataframe): passenger chart
-	        Dataframe2 (dataframe): table of seats available 
-
-        Side Effects:
-	        Concatenates both data frames together
-         
-         
-        """
-    # seat_id, boarder order, name, location
->>>>>>> c9591590e1794f59c5227ee53a0cbcf94a2f138d
-
 class Passenger:
     """Declaration of a Passenger class that accounts for passenger information 
        such as name, date of birth, whether the person has accommodations, 
@@ -232,49 +136,31 @@ class Passenger:
             
         elif price < 100:
             priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
-<<<<<<< HEAD
             seats = seat_data[['seat_id', 'seat_prices', 'service_class ']]
             merged_seats = pd.merge(seats, priced_seats[['seat_id', 
                                 'seat_prices', 'service_class ']], how='right')
             print("Here are seats within your budget.\n"
                   "You're only able to purchase coach")
-=======
-            seats = seat_data[['seat_id', 'seat_prices', 'service_class']]
-            merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class']], how='right')
-            print("Here are seats within your budget. You're only able to purchase coach")
->>>>>>> 4e76454de9d43eebfcbbfe8d37317a19d6940187
             print(merged_seats)
             
         elif price < 360:
             priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
-<<<<<<< HEAD
             seats = seat_data[['seat_id', 'seat_prices', 'service_class ']]
             merged_seats = pd.merge(seats, priced_seats[['seat_id', 
                                 'seat_prices', 'service_class ']], how='right')
             
             print("Here are seats within your budget.\n"
                   "You're able to purchase either coach or business")
-=======
-            seats = seat_data[['seat_id', 'seat_prices', 'service_class']]
-            merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class']], how='right')
-            print("Here are seats within your budget. You're able to purchase either coach or buisness")
->>>>>>> 4e76454de9d43eebfcbbfe8d37317a19d6940187
             print(merged_seats)
             
         elif price < 1400:
             priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
-<<<<<<< HEAD
             seats = seat_data[['seat_id', 'seat_prices', 'service_class ']]
             merged_seats = pd.merge(seats, priced_seats[['seat_id', 
                                 'seat_prices', 'service_class ']], how='right')
             
             print("Here are seats within your budget.\n"
                   "You're able to purchase coach, business, or first class")
-=======
-            seats = seat_data[['seat_id', 'seat_prices', 'service_class']]
-            merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class']], how='right')
-            print("Here are seats within your budget. You're able to purchase coach, buisness, or first class")
->>>>>>> 4e76454de9d43eebfcbbfe8d37317a19d6940187
             print(merged_seats)
             
         else:
