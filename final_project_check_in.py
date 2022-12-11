@@ -201,27 +201,27 @@ class Passenger:
             
         elif price < 100:
             priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
-            seats = seat_data[['seat_id', 'seat_prices', 'service_class ']]
-            merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class ']], how='right')
+            seats = seat_data[['seat_id', 'seat_prices', 'service_class']]
+            merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class']], how='right')
             print("Here are seats within your budget. You're only able to purchase coach")
             print(merged_seats)
             
         elif price < 360:
             priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
-            seats = seat_data[['seat_id', 'seat_prices', 'service_class ']]
-            merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class ']], how='right')
+            seats = seat_data[['seat_id', 'seat_prices', 'service_class']]
+            merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class']], how='right')
             print("Here are seats within your budget. You're able to purchase either coach or buisness")
             print(merged_seats)
             
         elif price < 1400:
             priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
-            seats = seat_data[['seat_id', 'seat_prices', 'service_class ']]
-            merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class ']], how='right')
+            seats = seat_data[['seat_id', 'seat_prices', 'service_class']]
+            merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class']], how='right')
             print("Here are seats within your budget. You're able to purchase coach, buisness, or first class")
             print(merged_seats)
             
         else:
-            seats = seat_data[['seat_id', 'seat_prices', 'service_class ']]
+            seats = seat_data[['seat_id', 'seat_prices', 'service_class']]
             print("Here are seats within your budget")
             print(seats)
             
