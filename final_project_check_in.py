@@ -150,8 +150,12 @@ class Passenger:
         #access the filepath
         #read the user input of desired seat_preference
         #conditional will display available seats based on desired seat_preference (A, M, W)
+<<<<<<< HEAD
         
         seat_data = self.flight_seating
+=======
+        seat_data = pd.read_csv("flight_seating.csv")
+>>>>>>> 1082c37fe722c32df33a650d69564491aa330fc6
         preference = input("Would you like a middle, aisle, or window seat?\n"
                            "Middle(M), Aisle(A), Window(W). Aisle is reserved\n" 
                            "for accommodations and has a higher price point")
