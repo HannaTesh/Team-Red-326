@@ -24,7 +24,7 @@ class Passenger:
 	    seat_preference(str): The user's preferred seat
     """
     
-    def __init__(self, name, dob, accommodation, service_class, seat_preference, price):
+    def __init__(self, flight_seating, name, dob):
         """Current booking with Customer information
 
 	    Args:
@@ -41,48 +41,21 @@ class Passenger:
             
 	        seat_preference(str): The preference in the seat the user wants.
         """
-        #connecting flights, 
-        seat_data = pd.read_csv("flight 201 seating chart.csv")
+        
+        flight_seating = pd.read_csv("flight_seating.csv")
+        self.flight_seating = flight_seating
         self.name = name
         self.dob = dob
-        self.accomodation = accommodation
-        self.service_class = service_class
-        self.seat_preference = seat_preference
-        self.price = price
         
-
-    def Flight_Booking(filepath):
-        """reads a data file and place it into a dataframe
-    
-        Args:
-        filepath(str): file path to the data
-    
-        Side effect:
-        Reads data file and appends it to a dataframe"""
-        
-        filepath = pd.read_csv("flight 201 seating chart.csv")
-        
-
-    #def seat_filter(self, seats):
-        #"""Uses pandas to filter a table of seats
-        
-        #Args:
-            #seats(int): number of seats available
-	
-	    #Side Effects: 
-        #Sets a new filtered table of seats
-        #"""
-        
-    def age_filter(filepath):
+    def age_filter(self, dob):
         
         # access the file path
         # reads the user inputted age (Format: "year/mm/dd")
         # uses regex to a determine whether a passenger is over the age of 14
         # If under the age of 14 "You cant fly alone"
         
-        filepath = pd.read_csv("flight 201 seating chart.csv")
-        
-        dob = input("what is your date of birth? Format: year")
+        dob = self.dob
+        #dob = input("what is your date of birth? Format: year")
         
         age_regex = re.search(r"^\d{4}", dob)
         
@@ -103,7 +76,8 @@ class Passenger:
         #read the user input of desired accommodation 
         #if accommodation is need, accomodation seats will be displayed to choose from, accommodation seats will cost less
         #if not, all seats will be displayed
-        seat_data = pd.read_csv("flight_seating.csv")
+        
+        seat_data = self.flight_seating
 
         person_with_accommodation = input
         ("Enter TRUE or FALSE to if you need accommodations:")
@@ -126,7 +100,8 @@ class Passenger:
         #Help: Accommadation and pricing 
         #If budget input is 80 and the user needs an accommadation, the user cannot afford the ticket
         
-        seat_data = pd.read_csv("flight_seating.csv")
+        seat_data = self.flight_seating
+        
         price_str = input("What's the most you're willing to spend on this\n"
                           "ticket?")
         price = int(price_str)
@@ -170,12 +145,13 @@ class Passenger:
             
         
             
-    def seat_preference_filter():
+    def seat_preference_filter(self):
         
         #access the filepath
         #read the user input of desired seat_preference
         #conditional will display available seats based on desired seat_preference (A, M, W)
-        seat_data = pd.read_csv("flight 201 seating chart.csv")
+        
+        seat_data = self.flight_seating
         preference = input("Would you like a middle, aisle, or window seat?\n"
                            "Middle(M), Aisle(A), Window(W). Aisle is reserved\n" 
                            "for accommodations and has a higher price point")
@@ -199,8 +175,9 @@ class Passenger:
     def __repr__(self):
         #Show final seat the user selects based on criteria they inputted.
         # (Input values narrowed down)
+        # 
         
-    def main(filepath, available_seats, available_subcategory):
+    def main(flight_seating):
         """Merges the information from class person and class reservation
 
 	    Args:
@@ -211,6 +188,15 @@ class Passenger:
 	    Side Effects:
 	    Merging of class person and class reservation
         """
+        
+        flight_seating = pd.read_csv("flight_seating.csv")
+        
+        seat_data = Passenger(flight_seating)
+        filtered_age = seat_data.age_filter(input("what is your date of birth? Format: YYYYMMDD"))
+        
+        print(filtered_age, )
+        
+        
         
     def arg_parse(args):
         """Processes command line argument
