@@ -150,30 +150,27 @@ class Passenger:
         #access the filepath
         #read the user input of desired seat_preference
         #conditional will display available seats based on desired seat_preference (A, M, W)
-<<<<<<< HEAD
-        
-        seat_data = self.flight_seating
-=======
         seat_data = pd.read_csv("flight_seating.csv")
->>>>>>> 1082c37fe722c32df33a650d69564491aa330fc6
-        preference = input("Would you like a middle, aisle, or window seat?\n"
-                           "Middle(M), Aisle(A), Window(W). Aisle is reserved\n" 
-                           "for accommodations and has a higher price point")
+        preference = input("Would you like a middle, aisle, or window seat? Middle(M), Aisle(A), Window(W). Asile is reserved for accomodations and has a higher price point")
         if preference == "M":
-            preferred_seats = seat_data[(seat_data["seat_preference"] == "M") & 
-                                        (seat_data["seat_id"])]
-            print(preferred_seats)
+            perfered_seats = seat_data[(seat_data['seat_preference']=="M")]
+            seats = seat_data[["seat_id","seat_preference"]]
+            merged_seats = pd.merge(seats,perfered_seats[["seat_id","seat_preference"]], how = 'right')
+            print(merged_seats)
             print("Here are all the middle seats available")
         if preference == "A":
-            preferred_seats = seat_data[(seat_data["seat_preference"] == "A") & 
-                                        (seat_data["seat_id"])]
-            print(preferred_seats)
-            print("Here are all the Aisle seat available")
+            perfered_seats = seat_data[(seat_data['seat_preference']=="A")]
+            seats = seat_data[["seat_id","seat_preference"]]
+            merged_seats = pd.merge(seats,perfered_seats[["seat_id","seat_preference"]], how = 'right')
+            print(merged_seats)
+            print("Here are all the aisle seats available")
         if preference == "W":
-            preferred_seats = seat_data[(seat_data["seat_preference"] == "W") & 
-                                        (seat_data["seat_id"])]
-            print(preferred_seats)
+            perfered_seats = seat_data[(seat_data['seat_preference']=="W")]
+            seats = seat_data[["seat_id","seat_preference"]]
+            merged_seats = pd.merge(seats,perfered_seats[["seat_id","seat_preference"]], how = 'right')
+            print(merged_seats)
             print("Here are all the window seats available")
+
         
         
     def __repr__(self):
