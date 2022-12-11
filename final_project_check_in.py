@@ -172,16 +172,17 @@ class Passenger:
         #read the user input of desired accomodation 
         #if accomodation is need, accomodation seats will be displayed to choose from, accomodation seats will cost less
         #if not, all seats will be displayed
-        seat_data = pd.read_csv("flight 201 seating chart.csv")
+        seat_data = pd.read_csv("flight_seating.csv")
 
-        yaccomodation = input("Enter TRUE or FALSE to if you need accomodations:")
-        if yaccomodation == 'TRUE':
-            accomodated_seats = seat_data[(seat_data["accomodation"] == 'TRUE')and (seat_data["seat_id"])]
-            print(accomodated_seats)
+        person_with_accommodation = input("Enter TRUE or FALSE to if you need accommodations:")
+        if person_with_accommodation == 'TRUE':
+            seats = seat_data[["seat_id", "accommodation"]] 
+            true_accomodation = seat_data[(seat_data["accommodation"] == True)]
+            accommodated_seats = pd.merge(seats, true_accom[["seat_id", "accommodation"]], how="right")
+            print(accommodated_seats)
         else:
-            all_seats = seat_data[(seat_data["accomodation"])and (seat_data["seat_id"])]
-            print(all_seats)
-            
+            all_seats = seat_data[["seat_id", "accommodation"]]
+            print(all_seats)   
         
     def service_class_filter(self):
         
