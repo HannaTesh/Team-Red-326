@@ -150,6 +150,7 @@ class Passenger:
         #access the filepath
         #read the user input of desired seat_preference
         #conditional will display available seats based on desired seat_preference (A, M, W)
+        
         seat_data = pd.read_csv("flight_seating.csv")
         preference = input("Would you like a middle, aisle, or window seat? Middle(M), Aisle(A), Window(W). Asile is reserved for accomodations and has a higher price point")
         if preference == "M":
