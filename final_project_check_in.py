@@ -1,208 +1,215 @@
-import pandas as pd
+
 import re
+import pandas as pd
 
-class Passenger:
-    """Declaration of a Passenger class that accounts for passenger information 
-       such as name, date of birth, whether the person has accommodations, 
-       what service class they belong to, and their preference of seat within 
-       the row.
-
-    Attributes:
-	    name(str): the name of the user.
-     
-	    dob(int): the user's date of birth.
-     
-	    accommodation_status(bool): Whether or not the user has a seating 
-        accommodation.
-        
-	    accommodation_type(str): The type of accommodation the user possesses.
-     
-	    service_class(str): The airplane class of the user. 
-        It will be one of the three class, first class, business class, 
-        and coach. It is represented as (F, B, C) respectively.
-      
-	    seat_preference(str): The user's preferred seat
-    """
+class Passenger():
     
-    def __init__(self, flight_seating, name, dob):
-        """Current booking with Customer information
-
-	    Args:
-	        name(str): Name of user
-	        dob(int): Date of birth of user
-	        accommodation_status(bool): Whether or not the person has a seating 
-            accommodation.
-            
-	        accommodation_type(str): What type of accommodation the user 
-            possesses, must be one of these three senior, pregnant, disabled.
-            
-	        service_class(str): The service class section of the airplane where 
-            the user will be seated.
-            
-	        seat_preference(str): The preference in the seat the user wants.
-        """
+    #Andrew Liu
+    def __init__(self, name = ' ', dob = '20221211', accomodation = 'FALSE', destination = 'France', direct_flight = 'TRUE', service_class = 'C', price = '0', preference = 'A'):
         
-        flight_seating = pd.read_csv("flight_seating.csv")
-        self.flight_seating = flight_seating
-        self.name = name
         self.dob = dob
+        self.name = name
+        self.accomodation = accomodation
+        self.destination = destination
+        self.direct_flight = direct_flight
+        self.service_class = service_class
+        self.price = price
+        self.preference = preference
         
-    def age_filter(self, dob):
+    #def custom_greeting(self, user):
+        #def greeting(name)
+        #This method will: 
+        #read through a text file containing a greeting message to our air line, take in a user's inputted name, 
+        #then using regex will insert that name to a blank spot within the text file,
+        #then print out the text with the user's name
         
-        # access the file path
-        # reads the user inputted age (Format: "year/mm/dd")
-        # uses regex to a determine whether a passenger is over the age of 14
-        # If under the age of 14 "You cant fly alone"
+        #str_user = str(user)
+        #with open('welcome.txt', 'r+', encoding= "utf-8") as text_file:
+            #contents = text_file.read().replace(f'customer_name', {str_user})
+        #print(contents)
+    
+    #Andrew Liu 
+    def age_filter(self, new_dob):
         
-        dob = self.dob
-        #dob = input("what is your date of birth? Format: year")
-        
-        age_regex = re.search(r"^\d{4}", dob)
-        
+        age_regex = re.search(r"^\d{4}", new_dob)
         year = int(age_regex.group(0))
-        
         age = 2022 - year
         
         if age >= 14:
             print(f"The user is {age} years old, they are able to purchase a ticket")
-            
         else:
             print(f"The user is {age} years old, they are too young to purchase a ticket")
+            
         
-# Patrick Polglase    
-    def accommodation_filter(self):
+    def accommodation_filter(self, accom):
         
-        #access the filepath
-        #read the user input of desired accommodation 
-        #if accommodation is need, accomodation seats will be displayed to choose from, accommodation seats will cost less
-        #if not, all seats will be displayed
+        seat_data = pd.read_csv("flight_seating.csv")
         
-        seat_data = self.flight_seating
-
-        person_with_accommodation = input
-        ("Enter TRUE or FALSE to if you need accommodations:")
-        
-        if person_with_accommodation == 'TRUE':
-            seats = seat_data[["seat_id", "accommodation"]] 
+        if accom == 'TRUE':
+            seats = seat_data[["seat_id", "accommodation", "destination", "direct_flight", "service_class", "seat_prices", "seat_preference" ]] 
             true_accommodation = seat_data[(seat_data["accommodation"] == True)]
-            accommodated_seats = pd.merge(seats, true_accommodation[["seat_id", 
-                                                "accommodation"]], how="right")
+            accommodated_seats = pd.merge(seats, true_accommodation[["seat_id", "accommodation"]], how="right")
             print(accommodated_seats)
+            self.accommodated_seats = accommodated_seats
         else:
-            all_seats = seat_data[["seat_id", "accommodation"]]
-            print(all_seats)   
+            accommodated_seats = seat_data[["seat_id", "accommodation", "destination", "direct_flight", "service_class", "seat_prices", "seat_preference"]]
+            print(accommodated_seats)
+            self.accommodated_seats = accommodated_seats
+            
+    def destination_filter(self, new_location):
         
-    def service_class_filter(self):
+        seat_data = pd.read_csv("flight_seating.csv")
         
-        #access the filepath
-        #read the user input of desired service class
-        #conditional will display available seats based on desired service class (F, B, C)
-        #Help: Accommadation and pricing 
-        #If budget input is 80 and the user needs an accommadation, the user cannot afford the ticket
+        if new_location == 'France':
+            seats = self.accommodated_seats
+            true_seats = seat_data[(seat_data["destination"] == 'France')]
+            destination_seats = pd.merge(self.accommodated_seats, true_seats[["seat_id", "destination"]], how="inner")
+            print(destination_seats)
+            self.destination_seats = destination_seats
+            
+        elif new_location == 'Argentina':
+            seats = self.accommodated_seats
+            true_seats = seat_data[(seat_data["destination"] == 'Argentina')]
+            destination_seats = pd.merge(seats, true_seats[["seat_id", "destination"]], how="inner")
+            print(destination_seats)
+            self.destination_seats = destination_seats
+            
+        elif new_location == 'Croatia':
+            seats = self.accommodated_seats
+            true_seats = seat_data[(seat_data["destination"] == 'Croatia')]
+            destination_seats = pd.merge(seats, true_seats[["seat_id", "destination"]], how="inner")
+            print(destination_seats)
+            self.destination_seats = destination_seats
+            
+        elif new_location == 'Morocco':
+            seats = self.accommodated_seats
+            true_seats = seat_data[(seat_data["destination"] == 'Morocco')]
+            destination_seats = pd.merge(seats, true_seats[["seat_id", "destination"]], how="inner")
+            print(destination_seats)
+            self.destination_seats = destination_seats
+            
+        else:
+            seats = self.accommodated_seats
+            print(destination_seats)
+            self.destination_seats = destination_seats
+            
+            
+    def direct_flight_filter(self, direct):
         
-        seat_data = self.flight_seating
+        seat_data = pd.read_csv("flight_seating.csv")
         
-        price_str = input("What's the most you're willing to spend on this\n"
-                          "ticket?")
-        price = int(price_str)
+        if direct == 'D':
+            seats = self.destination_seats
+            true_direct = seat_data[(seat_data["direct_flight"] == True)]
+            direct_seats = pd.merge(seats, true_direct[["seat_id", "direct_flight"]], how="inner")
+            print(direct_seats)
+            self.direct_seats = direct_seats
+            
+        else:
+            seats = self.destination_seats
+            true_direct = seat_data[(seat_data["direct_flight"] == False)]
+            direct_seats = pd.merge(seats, true_direct[["seat_id", "direct_flight"]], how="inner")
+            print(direct_seats)
+            self.direct_seats = direct_seats
+            
+    def seat_choice(self, placement): 
+
+        seat_data = pd.read_csv("flight_seating.csv")
+    
+        seats = self.direct_seats
+        preferred_placement = seat_data[(seat_data["service_class"] == placement)]
+        placement_seats = pd.merge(seats, preferred_placement[["seat_id", "service_class"]], how="inner") 
+        print(placement_seats)
+        print("Here are all the coach seats available")
+        self.placement_seats = placement_seats
+            
+         
+    def price_filter(self, new_price):
+        
+        # Clean up
+        
+        seat_data = pd.read_csv("flight_seating.csv")
+        
+        price = int(new_price)
         
         if price < 69:
             print("There are no available seats within that price range")
-            
         elif price < 100:
+            seats = self.placement_seats
             priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
-            seats = seat_data[['seat_id', 'seat_prices', 'service_class ']]
-            merged_seats = pd.merge(seats, priced_seats[['seat_id', 
-                                'seat_prices', 'service_class ']], how='right')
-            print("Here are seats within your budget.\n"
-                  "You're only able to purchase coach")
+            merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class']], how='inner')
+            print("Here are seats within your budget.")
             print(merged_seats)
-            
+            self.merged_seats = merged_seats
         elif price < 360:
+            seats = self.placement_seats
             priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
-            seats = seat_data[['seat_id', 'seat_prices', 'service_class ']]
-            merged_seats = pd.merge(seats, priced_seats[['seat_id', 
-                                'seat_prices', 'service_class ']], how='right')
-            
-            print("Here are seats within your budget.\n"
-                  "You're able to purchase either coach or business")
+            merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class']], how='inner')
+            print("Here are seats within your budget.")
             print(merged_seats)
-            
+            self.merged_seats = merged_seats
         elif price < 1400:
+            seats = self.placement_seats
             priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
-            seats = seat_data[['seat_id', 'seat_prices', 'service_class ']]
-            merged_seats = pd.merge(seats, priced_seats[['seat_id', 
-                                'seat_prices', 'service_class ']], how='right')
-            
-            print("Here are seats within your budget.\n"
-                  "You're able to purchase coach, business, or first class")
+            merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class']], how='inner')
+            print("Here are seats within your budget.")
             print(merged_seats)
-            
+            self.merged_seats = merged_seats
         else:
-            seats = seat_data[['seat_id', 'seat_prices', 'service_class']]
-            print("Here are seats within your budget")
-            print(seats)
-            
-        
-            
-    def seat_preference_filter(self):
-        
-        #access the filepath
-        #read the user input of desired seat_preference
-        #conditional will display available seats based on desired seat_preference (A, M, W)
+            merged_seats = self.placement_seats
+            print("All seats are within your budget")
+            print(merged_seats)
+            self.merged_seats = merged_seats
+    
+    
+    def seat_preference_filter(self, new_preference):
         
         seat_data = pd.read_csv("flight_seating.csv")
-        preference = input("Would you like a middle, aisle, or window seat? Middle(M), Aisle(A), Window(W). Asile is reserved for accomodations and has a higher price point")
-        if preference == "M":
-            perfered_seats = seat_data[(seat_data['seat_preference']=="M")]
-            seats = seat_data[["seat_id","seat_preference"]]
-            merged_seats = pd.merge(seats,perfered_seats[["seat_id","seat_preference"]], how = 'right')
-            print(merged_seats)
+        
+        if new_preference == "M":
+            seats = self.merged_seats
+            seat_preference = seat_data[(seat_data["seat_preference"] == "M")]
+            seat_location = pd.merge(seats, seat_preference[["seat_id", "seat_preference"]], how="inner")
+            print(seat_location)
             print("Here are all the middle seats available")
-        if preference == "A":
-            perfered_seats = seat_data[(seat_data['seat_preference']=="A")]
-            seats = seat_data[["seat_id","seat_preference"]]
-            merged_seats = pd.merge(seats,perfered_seats[["seat_id","seat_preference"]], how = 'right')
-            print(merged_seats)
-            print("Here are all the aisle seats available")
-        if preference == "W":
-            perfered_seats = seat_data[(seat_data['seat_preference']=="W")]
-            seats = seat_data[["seat_id","seat_preference"]]
-            merged_seats = pd.merge(seats,perfered_seats[["seat_id","seat_preference"]], how = 'right')
-            print(merged_seats)
-            print("Here are all the window seats available")
+            self.seat_location = seat_location
+            
+        if new_preference == "A":
+            seats = self.merged_seats
+            seat_preference = seat_data[(seat_data["seat_preference"] == "A")]
+            seat_location = pd.merge(seats, seat_preference[["seat_id", "seat_preference"]], how="inner")
+            print(seat_location)
+            print("Here are all the middle seats available")
+            self.seat_location = seat_location
+            
+        if new_preference == "W":
+            seats = self.merged_seats
+            seat_preference = seat_data[(seat_data["seat_preference"] == "W")]
+            seat_location = pd.merge(seats, seat_preference[["seat_id", "seat_preference"]], how="inner")
+            print(seat_location)
+            print("Here are all the middle seats available")
+            self.seat_location = seat_location
+        
+                 
+def demo():
+    
+    passenger = Passenger()
+    
+    #passenger.custom_greeting(input("what is your name \n"))
 
-        
-        
-    def __repr__(self):
-        #Show final seat the user selects based on criteria they inputted.
-        # (Input values narrowed down)
-        # 
-        
-    def main(flight_seating):
-        """Merges the information from class person and class reservation
-
-	    Args:
-		    Filepath(str): path to the file
-		    Available_seats(int): seats available
-		    available _subcategory(str): class of seats available
-
-	    Side Effects:
-	    Merging of class person and class reservation
-        """
-        
-        flight_seating = pd.read_csv("flight_seating.csv")
-        
-        seat_data = Passenger(flight_seating)
-        filtered_age = seat_data.age_filter(input("what is your date of birth? Format: YYYYMMDD"))
-        
-        print(filtered_age, )
-        
-        
-        
-    def arg_parse(args):
-        """Processes command line argument
-
-        Args:
-	        args(list of strings): command-line arguments
-        """
+    passenger.age_filter(input("what is your date of birth? Format: YYYYMMDD \n"))
+    
+    passenger.accommodation_filter(input("Enter TRUE or FALSE to if you need accommodations: \n"))
+    
+    passenger.destination_filter(input("Please enter your desired destination. Today's available locations are: France, Argentina, Croatia, and Morocco \n"))
+    
+    passenger.direct_flight_filter(input("Enter D if you would like to board a direct flight or C if you would like to board a connecting flight: \n"))
+    
+    passenger.seat_choice(input("Would you like to fly coach, buisness, or first class? Coach(C), Buisness(B), First Class(F). \n"))
+    
+    passenger.price_filter(input("What's the most you're willing to spend on this ticket? \n"))
+    
+    passenger.seat_preference_filter(input("Would you like a middle, aisle, or window seat? Middle(M), Aisle(A), Window(W). Asile is reserved for accomodations and has a higher price point \n"))
+    
+if __name__ == "__main__":
+    demo()
