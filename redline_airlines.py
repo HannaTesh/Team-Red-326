@@ -94,6 +94,7 @@ class Passenger():
 
         seat_data = pd.read_csv("flight_seating.csv")
         destcount = seat_data["destination"].value_counts()
+        plt.title("Number of outgoing flights to these destinations")
         plt.pie(destcount, labels = destcount.index)
         plt.show()
             
@@ -193,8 +194,9 @@ class Passenger():
             self.seat_location = seat_location
 
         seatcount = seat_data["seat_preference"].value_counts()
+        plt.title("Seats Available")
         plt.pie(seatcount, labels = seatcount.index)
-        plt.show() 
+        plt.show()
 
 #Tega Ojegun                 
 
@@ -236,7 +238,7 @@ def boarding_ticket():
 
 # Meet Koradia
 
-def __repr__(self):
+def __str__(self):
     return f'Name: {self.name}, DOB: {self.dob}, Accomodation: {self.accomodation}, Destination: {self.destination}, Direct-Flight: {self.direct_flight}, Class: {self.service_class}, Price: {self.price}, Preference: {self.preference}'   
 
 if __name__ == "__main__":
