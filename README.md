@@ -3,7 +3,7 @@
 
 ### Purpose:
 
-The purpose of our program is to let the user choose a desired Seat on our airline based on their desired inputted criteria. At the end of the program, the user will recieve a 'Boarding Ticket' detailing each of their selections throughout the code.
+The purpose of our program is to let the user choose a desired Seat on our airline based on their desired inputted criteria. At the end of the program, the user will recieve a *'Boarding Ticket'* detailing each of their selections throughout the code.
 
 ### How to run our Program:
 The program narrows down to a user's preferred seating choice by filtering through a series of questions.
