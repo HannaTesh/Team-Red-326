@@ -1,11 +1,11 @@
 # Redline Airlines Airplane Bording Ticket and Reservation
-## Team Red INST326 0101
+### Team Red INST326 0101
 
-### Purpose:
+## Purpose:
 
 The purpose of our program is to let the user choose a desired Seat on our airline based on their desired inputted criteria. At the end of the program, the user will recieve a *'Boarding Ticket'* detailing each of their selections throughout the code.
 
-### How to run our Program:
+## How to run our Program:
 The program narrows down to a user's preferred seating choice by filtering through a series of questions.
 
 The program first asks for the user's name.
@@ -21,19 +21,25 @@ If a user enters ```TRUE```, the accomodating seat's price will drop $30
 If a user enters ```FALSE```, accomodating seats will still be shown as they are still available for everyone to purchase.
 The program then prints out a table of all available seats based on the user's inputted criteria 
 
-The next question will be the destination they want to fly. The outgoing flights that day are Morocco, France, Argentina and Croatia.
-The user will select their destination for this question from the given options.
+The folowing question the program asks is the desired destination that the user would like to fly to. The outgoing flights of the day are Morocco, France, Argentina and Croatia.
+The user will then select their destination and will then be able to see a table of available seats based on all of their selected criteria.
+Additionally, after a selection is made, a pie chart will pop up with all the outgoing flights for that day. The graph displays how many of each flights to each destination. After viewing this graph, the user **must close it to move further.**
 
-A Pie chart will pop up with all the outgoing flights for that day after a desination selection is made. After viewing this graph, the user needs to close it to move further.
-
-The next question asked is if the user wants a direct flight or a connecting flight.
-The user answers this by typing D for direct flight or C for connecting flight.
+The next question the program asks is if the user wants a direct flight or a connecting flight.
+The user will then answer this by typing ```D``` for direct flight or ```C``` for connecting flight.
 
 The next question asked will be service class which has options to travel in coach, business or first class.
-The user addresses this question by answering C for coach, B business or F for first class.
+The user addresses this question by answering ```C``` for coach, ```B``` business or ```F``` for first class.
 
 The next question asked will be user's price preference which range from 50-1500.
-Here the user picks their prefered price range.
+Here the user picks their prefered price.
 
 The next question program will ask is their seat preference with options of aisle, middle or window.
-Here the user will type A for aisle seat, M for middle seat or W for window seat.
+Here the user will type ```A``` for aisle seat, ```M``` for middle seat or ```W``` for window seat.
+
+Once every user input decision has been made, every choice is compiled into a *'Boarding Ticket'*.
+
+## Team Contributions:
+### Tega Ojegun
+Methods/Functions: **__init__() & boarding_ticket()**
+Concepts: **Implementation of optional parameters & Implementation of sequence unpacking**
