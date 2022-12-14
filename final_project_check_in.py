@@ -5,8 +5,9 @@ import numpy as np
 
 class Passenger():
     
-    #Andrew Liu
-    def __init__(self, name = ' ', dob = '20221211', accomodation = 'FALSE', destination = 'France', direct_flight = 'TRUE', service_class = 'C', price = '0', preference = 'A'):
+    #Tega Ojegun
+    
+    def __init__(self, name = ' ', dob = '', accomodation = 'FALSE', destination = '', direct_flight = 'TRUE', service_class = '', price = '0', preference = ''):
         
         self.dob = dob
         self.name = name
@@ -194,26 +195,44 @@ class Passenger():
         seatcount = seat_data["seat_preference"].value_counts()
         plt.pie(seatcount, labels = seatcount.index)
         plt.show() 
-                 
-def demo():
-    
-    passenger = Passenger()
-    
-    #passenger.custom_greeting(input("what is your name \n"))
 
-    passenger.age_filter(input("what is your date of birth? Format: YYYYMMDD \n"))
-    
-    passenger.accommodation_filter(input("Enter TRUE or FALSE to if you need accommodations: \n"))
-    
-    passenger.destination_filter(input("Please enter your desired destination. Today's available locations are: France, Argentina, Croatia, and Morocco \n"))
-    
-    passenger.direct_flight_filter(input("Enter D if you would like to board a direct flight or C if you would like to board a connecting flight: \n"))
-    
-    passenger.seat_choice(input("Would you like to fly coach, buisness, or first class? Coach(C), Buisness(B), First Class(F). \n"))
-    
-    passenger.price_filter(input("What's the most you're willing to spend on this ticket? \n"))
-    
-    passenger.seat_preference_filter(input("Would you like a middle, aisle, or window seat? Middle(M), Aisle(A), Window(W). Asile is reserved for accomodations and has a higher price point \n"))
+#Tega Ojegun                 
+
+def boarding_ticket():
+
+    passenger = Passenger()
+
+    name = input("what is your name \n")
+    passenger.custom_greeting(name)
+
+    year = input("what is your date of birth? Format: YYYYMMDD \n")
+    passenger.age_filter(year)
+
+    acc = input("Enter TRUE or FALSE to if you need accommodations: \n")
+    passenger.accommodation_filter(acc)
+
+    dest = input("Please enter your desired destination. Today's available locations are: France, Argentina, Croatia, and Morocco \n")
+    passenger.destination_filter(dest)
+
+    dir = input("Enter D if you would like to board a direct flight or C if you would like to board a connecting flight: \n")
+    passenger.direct_flight_filter(dir)
+
+    sc = input("Would you like to fly coach, buisness, or first class? Coach(C), Buisness(B), First Class(F). \n")
+    passenger.seat_choice(sc)
+
+    pr = input("What's the most you're willing to spend on this ticket? \n")
+    passenger.price_filter(pr)
+
+    loc = input("Would you like a middle, aisle, or window seat? Middle(M), Aisle(A), Window(W). Asile is reserved for accomodations and has a higher price point \n")
+    passenger.seat_preference_filter(loc)
+
+    boarding_ticket = [name, year, acc, dest, dir, sc, pr, loc]
+
+    name, dob,accomodation,destination,direct_flight,seat_choice,price_filter,seat_preference = boarding_ticket
+
+    print("Boarding Ticket Information")
+    print(f" NAME: {name} \n DOB: {dob} \n Accomodation: {accomodation} \n Destination: {destination} \n Direct Flight: {direct_flight} \n Seat Choice: {seat_choice} \n Price: {price_filter} \n Seat Preference: {seat_preference}")
+    print(f" Thank you for choosing Redline Airlines! Enjoy your flight {name}!")
 
 # Meet Koradia
 
@@ -221,4 +240,4 @@ def __repr__(self):
     return f'Name: {self.name}, DOB: {self.dob}, Accomodation: {self.accomodation}, Destination: {self.destination}, Direct-Flight: {self.direct_flight}, Class: {self.service_class}, Price: {self.price}, Preference: {self.preference}'   
 
 if __name__ == "__main__":
-    demo()
+    boarding_ticket()
