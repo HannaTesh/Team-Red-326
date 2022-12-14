@@ -4,11 +4,41 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 class Passenger():
+    """This class asks the user a series of questions that allows them to get their most desired seat based on many aspects such as
+    accommodations, price, seat preference, direct flight, and destination
     
+    Args:
+    name(str): Name of user
+    dob(int): date of birth
+    accommodation(boolean): If user needs an accommodation
+    destination(string): desired location 
+    direct_flight(boolean): Connecting or direct flight
+    price(int): price of flight
+    preference(string): location of seat
+    new_name(str): New name of user
+    new_dob(int): new sate of birth
+    accom(boolean): Has an accommodation or not
+    new_prefernce(string): Seat position (Aisle, Middle, Window)
+    placement(string): placment on the plane
+    
+    
+    """
     #Tega Ojegun
     
     def __init__(self, name = ' ', dob = '', accomodation = 'FALSE', destination = '', direct_flight = 'TRUE', service_class = '', price = '0', preference = ''):
+        """
+        Args:
+        name(str): Name of user
+        dob(int): date of birth
+        accommodation(boolean): If user needs an accommodation
+        destination(string): desired location 
+        direct_flight(boolean): Connecting or direct flight
+        price(int): price of flight
+        preference(string): location of seat
+        direct(boolean): 
+        Side Effects:
         
+        """
         self.dob = dob
         self.name = name
         self.accomodation = accomodation
@@ -20,6 +50,13 @@ class Passenger():
         
     #Patrick: with statement
     def custom_greeting(self, new_name):
+        """Opens a text file a reads a welcome message
+        Args:
+        new_name(string): name of user
+        
+        Side Effects:
+        prints content into the console 
+        """
         
         with open('welcome.txt', 'r+', encoding= "utf-8") as text_file:
             contents = text_file.read().replace('customer_name', str(new_name))
@@ -27,6 +64,13 @@ class Passenger():
     
     #Andrew Liu 
     def age_filter(self, new_dob):
+        """ Uses the user birth year to determine their age to see if they're old enough to buy a plane ticket
+        Args:
+        new_dob(int): year, month, and day
+
+        Side Effects:
+        Prints message to the console that determines if the user is above of below the age requirment
+        """
         
         age_regex = re.search(r"^\d{4}", new_dob)
         year = int(age_regex.group(0))
@@ -39,6 +83,13 @@ class Passenger():
             
         
     def accommodation_filter(self, accom):
+        """Filtering out dataset based on if user needs accommodations or not
+        Args:
+        accom(boolean): TRUE if user needs an accommadation, FALSE if it isnt necessary
+
+        Side Effects:
+        prints filtered dataset to the console 
+        """
         
         seat_data = pd.read_csv("flight_seating.csv")
         
@@ -56,6 +107,13 @@ class Passenger():
 # Meet Koradia
             
     def destination_filter(self, new_location):
+        """Gives the user the option of the location they want to travel to and the number of flights for each location
+        Args:
+        new_location(string): The location name
+
+        Side Effects:
+        prints filtered dataset to the console
+        """
         
         seat_data = pd.read_csv("flight_seating.csv")
         
@@ -100,6 +158,14 @@ class Passenger():
             
             
     def direct_flight_filter(self, direct):
+        """Allows user to pick if they want a direct of a connecting flight
+
+        Args:
+        direct(string): D for direct. C for connecting
+
+        Side Effects:
+        prints a filtered dataframe
+        """
         
         seat_data = pd.read_csv("flight_seating.csv")
         
@@ -118,6 +184,8 @@ class Passenger():
             self.direct_seats = direct_seats
             
     def seat_choice(self, placement): 
+        """
+        """
 
         seat_data = pd.read_csv("flight_seating.csv")
     
@@ -130,6 +198,13 @@ class Passenger():
             
        #Hanna Teshome  
     def price_filter(self, new_price):
+        """ Allows user to see what seats are available based on what they're willing to pay"
+        Args:
+        new_price(int): The number the user is willing to pay
+
+        Side Effects:
+        prints out a filtered dataset and a message to the console
+        """
 
         seat_data = pd.read_csv("flight_seating.csv")
 
@@ -166,6 +241,14 @@ class Passenger():
 # Meet Koradia
 
     def seat_preference_filter(self, new_preference):
+        """Allows user to pick where in the plane they want to sit.
+
+        Args
+        New_preference(string): Aisle(A), Middle(M), Window(M)
+
+        Side Effects:
+        prints filtered dataframe and a message to the console
+        """
         
         seat_data = pd.read_csv("flight_seating.csv")
         
@@ -201,6 +284,8 @@ class Passenger():
 #Tega Ojegun                 
 
 def boarding_ticket():
+    """
+    """
 
     passenger = Passenger()
 
@@ -239,6 +324,8 @@ def boarding_ticket():
 # Meet Koradia
 
 def __str__(self):
+    """
+    """
     return f'Name: {self.name}, DOB: {self.dob}, Accomodation: {self.accomodation}, Destination: {self.destination}, Direct-Flight: {self.direct_flight}, Class: {self.service_class}, Price: {self.price}, Preference: {self.preference}'   
 
 if __name__ == "__main__":
