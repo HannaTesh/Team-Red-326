@@ -11,13 +11,15 @@ The program narrows down to a user's preferred seating choice by filtering throu
 The program first asks for the user's name.
 The user then needs to input their their name.
 
-The user then needs to enter their date of birth in the format: YYYYMMDD.
+The user then needs to enter their date of birth in the format: **YYYYMMDD.**
 The program then uses a regular expression to determine the user's age.
 In order to purchase a ticker, the user must be 14 years old or more, if they are not the program will stop
 
 Next, the user will be asked will if they require accommodating seating.
-The user will address this question as ```TRUE``` if they need accommodations or ```FALSE``` if they do not need accommodations. 
+The user will address this question as ```TRUE``` if they need accommodations or ```FALSE``` if they do not need accommodations.
+If a user enters ```TRUE```, the accomodating seat's price will drop $30
 If a user enters ```FALSE```, accomodating seats will still be shown as they are still available for everyone to purchase.
+The program then prints out a table of all available seats based on the user's inputted criteria 
 
 The next question will be the destination they want to fly. The outgoing flights that day are Morocco, France, Argentina and Croatia.
 The user will select their destination for this question from the given options.
