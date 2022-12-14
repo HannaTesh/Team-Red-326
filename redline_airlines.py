@@ -130,11 +130,13 @@ class Passenger():
         Side Effects:
         prints filtered dataset to the console 
         """
-        
+
         if yes_accom == 'TRUE':
             seats = seat_data[["seat_id", "accommodation", "destination", "direct_flight", "service_class", "seat_prices", "seat_preference" ]] 
             true_accommodation = seat_data[(seat_data["accommodation"] == True)]
             accommodated_seats = pd.merge(seats, true_accommodation[["seat_id", "accommodation"]], how="right")
+            accommodated_seats["seat_prices"] = accommodated_seats["seat_prices"].apply(lambda x: x + 30)
+            print(f"Because you have decided to purchase an accomodation seat, there is a 30 dollar increase your ticket price")
             print(accommodated_seats)
             self.accommodated_seats = accommodated_seats
         else:
