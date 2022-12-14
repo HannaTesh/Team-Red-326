@@ -1,6 +1,7 @@
 import re
 import pandas as pd
 import matplotlib.pyplot as plt
+import sys
 import numpy as np
 
 seat_data = pd.read_csv("flight_seating.csv")
@@ -45,7 +46,6 @@ class Passenger():
 
 # Tega Ojegun
 # Concept: Implementation of optional parameters.
-    
     def __init__(self, name = ' ', dob = '', accommodation = 'FALSE', destination = '', direct_flight = 'TRUE', service_class = '', price = '0', preference = ''):
         """
         Args:
@@ -121,6 +121,7 @@ class Passenger():
         else:
             print(f"The user is {age} years old, they are too young to purchase a ticket")
             print("========================================================================================================\n")
+            sys.exit()
             
 # Hanna Teshome
 # Concept: Implementation of a custom list sorting with a key function; 
@@ -138,16 +139,19 @@ class Passenger():
             seats = seat_data[["seat_id", "accommodation", "destination", "direct_flight", "service_class", "seat_prices", "seat_preference" ]] 
             true_accommodation = seat_data[(seat_data["accommodation"] == True)]
             accommodated_seats = pd.merge(seats, true_accommodation[["seat_id", "accommodation"]], how="right")
-            accommodated_seats["seat_prices"] = accommodated_seats["seat_prices"].apply(lambda x: x + 30)
+            accommodated_seats["seat_prices"] = accommodated_seats["seat_prices"].apply(lambda x: x - 30)
             print(f"Because you have decided to purchase an accomodation seat, there is a 30 dollar increase your ticket price")
             print(accommodated_seats)
             print("========================================================================================================\n")
             self.accommodated_seats = accommodated_seats
-        else:
+        elif yes_accom == 'FALSE':
             accommodated_seats = seat_data[["seat_id", "accommodation", "destination", "direct_flight", "service_class", "seat_prices", "seat_preference"]]
             print(accommodated_seats)
             print("========================================================================================================\n")
             self.accommodated_seats = accommodated_seats
+        else:
+            print("Invalid response")
+            sys.exit()
 
 # Meet Koradia
 # Concept: Implementation of data visualization using pyplot.
@@ -195,9 +199,10 @@ class Passenger():
             
         else:
             seats = self.accommodated_seats
-            print(destination_seats)
+            #print(destination_seats)
+            print("There are no available flights to that location")
             print("========================================================================================================\n")
-            self.destination_seats = destination_seats
+            sys.exit()
 
         destcount = seat_data["destination"].value_counts()
         plt.title("Pie Chart Representing the Number of outgoing flights by Destination")
@@ -224,13 +229,18 @@ class Passenger():
             print("========================================================================================================\n")
             self.direct_seats = direct_seats
             
-        else:
+        elif direct == 'C':
             seats = self.destination_seats
             true_direct = seat_data[(seat_data["direct_flight"] == False)]
             direct_seats = pd.merge(seats, true_direct[["seat_id", "direct_flight"]], how="inner")
             print(direct_seats)
             print("========================================================================================================\n")
             self.direct_seats = direct_seats
+            
+        else:
+            print("Invalid response")
+            print("========================================================================================================\n")
+            sys.exit()
             
 # Patrick Polglase
 # Concept: Implementation of an f string.         
@@ -296,9 +306,8 @@ class Passenger():
             print(merged_seats)
             self.merged_seats = merged_seats
 
-            print("Try Spirit Airlines") if price < 55 else print("Here are seats within your budget!")
+            print("There are no available seats for that price. Try Spirit Airlines!") if price < 55 else print("Here are seats within your budget!")
             print("========================================================================================================\n")
-
     
 # Meet Koradia
 # Concept: Implementation of data visualization using pyplot.
@@ -389,7 +398,7 @@ def boarding_ticket():
     name, dob,accommodation,destination,direct_flight,seat_choice,price_filter,seat_preference = boarding_ticket
 
     print("========================================================================================================\n")
-    print("Boarding Ticket Information")
+    print("Boarding Ticket Information:")
     print(f" NAME: {name} \n DOB: {dob} \n ACCOMMODATION: {accommodation} \n DESTINATION: {destination} \n DIRECT FLIGHT: {direct_flight} \n SEAT CHOICE: {seat_choice} \n PRICE: ${price_filter} \n SEAT PREFERENCE: {seat_preference}")
     print(f" Thank you for choosing Redline Airlines! Enjoy your flight {name}!")
     print("========================================================================================================\n")
