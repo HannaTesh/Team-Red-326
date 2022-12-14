@@ -238,7 +238,8 @@ class Passenger():
         print(f"Here are all the seats available based off your selected placement: {placement}")
         self.placement_seats = placement_seats
             
-# Hanna Teshome  
+# Hanna Teshome 
+# Concept: Implementation of a conditional expression
     def price_filter(self, new_price):
         """ Allows user to see what seats are available based on their ticket 
         price budget 
