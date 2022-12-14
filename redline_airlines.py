@@ -3,73 +3,111 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
+seat_data = pd.read_csv("flight_seating.csv")
+
 class Passenger():
-    """This class asks the user a series of questions that allows them to get their most desired seat based on many aspects such as
-    accommodations, price, seat preference, direct flight, and destination
+    """An instance of a class asks the user a series of questions that allows them 
+    to get their most desired seat based on many aspects such as accommodations,
+    price, seat preference, direct flight, and destination.
     
-    Args:
-    name(str): Name of user
-    dob(int): date of birth
-    accommodation(boolean): If user needs an accommodation
-    destination(string): desired location 
-    direct_flight(boolean): Connecting or direct flight
-    price(int): price of flight
-    preference(string): location of seat
-    new_name(str): New name of user
-    new_dob(int): new sate of birth
-    accom(boolean): Has an accommodation or not
-    new_prefernce(string): Seat position (Aisle, Middle, Window)
-    placement(string): placment on the plane
+    Attributes:
     
+    name(str): the name of user
     
+    dob(int): date of birth of the user
+    
+    accommodation(boolean): Whether the user requires seating accommodation.
+    TRUE for yes
+    FALSE for no
+    
+    destination(string): string representation of the desired location 
+    
+    direct_flight(boolean): The status of whether the flight is connecting 
+    (FALSE) or the flight is direct (TRUE)
+    
+    price(int): the price of flight ticket
+    
+    preference(string): the preference of seat location on the plane 
+    (A, M, W)
+    
+    new_name(str): The user's input of the name of user
+    
+    new_dob(int): The user's input of the date of birth
+    
+    yes_accom(boolean): The status of the user's accommodation; TRUE or FALSE
+    
+    new_preference(string): Seat position on the plane (Aisle, Middle, Window)
+    
+    placement(string): the class placement on the plane as coach, business, and 
+    first class (C, B, F)
+
     """
-    #Tega Ojegun
+
+# Tega Ojegun
+# Concept: Implementation of optional parameters.
     
-    def __init__(self, name = ' ', dob = '', accomodation = 'FALSE', destination = '', direct_flight = 'TRUE', service_class = '', price = '0', preference = ''):
+    def __init__(self, name = ' ', dob = '', accommodation = 'FALSE', destination = '', direct_flight = 'TRUE', service_class = '', price = '0', preference = ''):
         """
         Args:
-        name(str): Name of user
-        dob(int): date of birth
-        accommodation(boolean): If user needs an accommodation
+        
+        name(str): name of user
+        
+        dob(int): the date of birth of the user
+        
+        accommodation(boolean): whether the user requires an accommodation, 
+        TRUE or FALSE
+        
         destination(string): desired location 
-        direct_flight(boolean): Connecting or direct flight
+        
+        direct_flight(boolean): User's choice of a connecting or direct flight
+        
         price(int): price of flight
+        
         preference(string): location of seat
-        direct(boolean): 
-        Side Effects:
+        
+        direct(boolean): whether the flight is a direct flight or connecting 
+        flight. TRUE is for direct flight, FALSE represent a connect flight.
         
         """
         self.dob = dob
         self.name = name
-        self.accomodation = accomodation
+        self.accommodation = accommodation
         self.destination = destination
         self.direct_flight = direct_flight
         self.service_class = service_class
         self.price = price
         self.preference = preference
         
-    #Patrick: with statement
+# Patrick Polglase
+# Concept: Implementation of with statement.
     def custom_greeting(self, new_name):
-        """Opens a text file a reads a welcome message
+        """Opens a text file that reads a welcome message and replaces the 
+        specified region with the string representation of the user's name.
+        
         Args:
-        new_name(string): name of user
+        new_name(string): the inputted name of user
         
         Side Effects:
-        prints content into the console 
+        prints new content to the text file and prints said contents 
+        into the console.
         """
         
         with open('welcome.txt', 'r+', encoding= "utf-8") as text_file:
             contents = text_file.read().replace('customer_name', str(new_name))
             print(contents)
     
-    #Andrew Liu 
+# Andrew Liu
+# Concept: Implementation of regular expression.
     def age_filter(self, new_dob):
-        """ Uses the user birth year to determine their age to see if they're old enough to buy a plane ticket
+        """ Uses the user's birth year to determine their age to see if 
+        they're old enough to buy a plane ticket.
+        
         Args:
-        new_dob(int): year, month, and day
+        new_dob(int): YYYYMMDD (Year, Month, Day)
 
         Side Effects:
-        Prints message to the console that determines if the user is above of below the age requirment
+        Prints message to the console that determines if the user is above of
+        below the age requirement.
         """
         
         age_regex = re.search(r"^\d{4}", new_dob)
@@ -81,19 +119,19 @@ class Passenger():
         else:
             print(f"The user is {age} years old, they are too young to purchase a ticket")
             
-        
-    def accommodation_filter(self, accom):
+# Hanna Teshome
+# Concept: Implementation of a custom list sorting with a key function; 
+# lambda expression
+    def accommodation_filter(self, yes_accom):
         """Filtering out dataset based on if user needs accommodations or not
         Args:
-        accom(boolean): TRUE if user needs an accommadation, FALSE if it isnt necessary
+        yes_accom(boolean): TRUE if user needs an accommodation, FALSE if it not required.
 
         Side Effects:
         prints filtered dataset to the console 
         """
         
-        seat_data = pd.read_csv("flight_seating.csv")
-        
-        if accom == 'TRUE':
+        if yes_accom == 'TRUE':
             seats = seat_data[["seat_id", "accommodation", "destination", "direct_flight", "service_class", "seat_prices", "seat_preference" ]] 
             true_accommodation = seat_data[(seat_data["accommodation"] == True)]
             accommodated_seats = pd.merge(seats, true_accommodation[["seat_id", "accommodation"]], how="right")
@@ -105,6 +143,7 @@ class Passenger():
             self.accommodated_seats = accommodated_seats
 
 # Meet Koradia
+# Concept: Implementation of data visualization using pyplot.
             
     def destination_filter(self, new_location):
         """Gives the user the option of the location they want to travel to and the number of flights for each location
@@ -114,8 +153,6 @@ class Passenger():
         Side Effects:
         prints filtered dataset to the console
         """
-        
-        seat_data = pd.read_csv("flight_seating.csv")
         
         if new_location == 'France':
             seats = self.accommodated_seats
@@ -150,13 +187,13 @@ class Passenger():
             print(destination_seats)
             self.destination_seats = destination_seats
 
-        seat_data = pd.read_csv("flight_seating.csv")
         destcount = seat_data["destination"].value_counts()
-        plt.title("Number of outgoing flights to these destinations")
+        plt.title("Pie Chart Representing the Number of outgoing flights by Destination")
         plt.pie(destcount, labels = destcount.index)
         plt.show()
             
-            
+ # Andrew Liu
+ # Implementation of merge operation using Pandas dataframe.          
     def direct_flight_filter(self, direct):
         """Allows user to pick if they want a direct of a connecting flight
 
@@ -166,9 +203,7 @@ class Passenger():
         Side Effects:
         prints a filtered dataframe
         """
-        
-        seat_data = pd.read_csv("flight_seating.csv")
-        
+                
         if direct == 'D':
             seats = self.destination_seats
             true_direct = seat_data[(seat_data["direct_flight"] == True)]
@@ -183,30 +218,37 @@ class Passenger():
             print(direct_seats)
             self.direct_seats = direct_seats
             
-    def seat_choice(self, placement): 
-        """
-        """
+# Patrick Polglase
+# Concept: Implementation of an f string.         
+    def seat_choice(self, placement):
+        """ Allows user to select from a dataframe of available seats that 
+        match their preferred class placement.
 
-        seat_data = pd.read_csv("flight_seating.csv")
+        Args:
+            placement (str): The location of the seating class onboard the 
+            plane. A string character of 'C', 'B', or 'F'
+        """
     
         seats = self.direct_seats
         preferred_placement = seat_data[(seat_data["service_class"] == placement)]
         placement_seats = pd.merge(seats, preferred_placement[["seat_id", "service_class"]], how="inner") 
         print(placement_seats)
-        print("Here are all the coach seats available")
+        print(f"Here are all the seats available based off your selected placement: {placement}")
         self.placement_seats = placement_seats
             
-       #Hanna Teshome  
+# Hanna Teshome  
     def price_filter(self, new_price):
-        """ Allows user to see what seats are available based on what they're willing to pay"
+        """ Allows user to see what seats are available based on their ticket 
+        price budget 
+        
         Args:
-        new_price(int): The number the user is willing to pay
+        new_price(int): The highest cost the user is willing to pay
 
         Side Effects:
-        prints out a filtered dataset and a message to the console
+        prints out a filtered dataset and a message to the console 
+        containing the selected placement.
+        
         """
-
-        seat_data = pd.read_csv("flight_seating.csv")
 
         price = int(new_price)
 
@@ -239,19 +281,18 @@ class Passenger():
 
     
 # Meet Koradia
-
+# Concept: Implementation of data visualization using pyplot.
     def seat_preference_filter(self, new_preference):
-        """Allows user to pick where in the plane they want to sit.
+        """Allows user to pick where in the plane they want to sit and displays
+        a pie chart of the percentage of seats by flight class
 
         Args
-        New_preference(string): Aisle(A), Middle(M), Window(M)
+        new_preference(string): Aisle(A), Middle(M), Window(M)
 
         Side Effects:
         prints filtered dataframe and a message to the console
         """
-        
-        seat_data = pd.read_csv("flight_seating.csv")
-        
+                
         if new_preference == "M":
             seats = self.merged_seats
             seat_preference = seat_data[(seat_data["seat_preference"] == "M")]
@@ -277,14 +318,20 @@ class Passenger():
             self.seat_location = seat_location
 
         seatcount = seat_data["seat_preference"].value_counts()
-        plt.title("Seats Available")
+        plt.title("Chart Representing the Seats Available by Flight Class")
         plt.pie(seatcount, labels = seatcount.index)
         plt.show()
 
-#Tega Ojegun                 
+# Tega Ojegun 
+# Concept: Implementation of sequence unpacking.         
 
 def boarding_ticket():
-    """
+    """Displays users information and prints it out as a boarding ticket
+    
+    Side Effects:
+        Prints out all of the user inputs and displays the the subsequent 
+        passenger information on the boarding ticket.
+
     """
 
     passenger = Passenger()
@@ -304,29 +351,34 @@ def boarding_ticket():
     dir = input("Enter D if you would like to board a direct flight or C if you would like to board a connecting flight: \n")
     passenger.direct_flight_filter(dir)
 
-    sc = input("Would you like to fly coach, buisness, or first class? Coach(C), Buisness(B), First Class(F). \n")
+    sc = input("Would you like to fly coach, business, or first class? Coach(C), Business(B), First Class(F). \n")
     passenger.seat_choice(sc)
 
     pr = input("What's the most you're willing to spend on this ticket? \n")
     passenger.price_filter(pr)
 
-    loc = input("Would you like a middle, aisle, or window seat? Middle(M), Aisle(A), Window(W). Asile is reserved for accomodations and has a higher price point \n")
+    loc = input("Would you like a middle, aisle, or window seat? Middle(M), Aisle(A), Window(W). Aisle is reserved for accommodations and has a higher price point \n")
     passenger.seat_preference_filter(loc)
 
     boarding_ticket = [name, year, acc, dest, dir, sc, pr, loc]
 
-    name, dob,accomodation,destination,direct_flight,seat_choice,price_filter,seat_preference = boarding_ticket
+    name, dob,accommodation,destination,direct_flight,seat_choice,price_filter,seat_preference = boarding_ticket
 
     print("Boarding Ticket Information")
-    print(f" NAME: {name} \n DOB: {dob} \n Accomodation: {accomodation} \n Destination: {destination} \n Direct Flight: {direct_flight} \n Seat Choice: {seat_choice} \n Price: {price_filter} \n Seat Preference: {seat_preference}")
+    print(f" NAME: {name} \n DOB: {dob} \n Accommodation: {accommodation} \n Destination: {destination} \n Direct Flight: {direct_flight} \n Seat Choice: {seat_choice} \n Price: {price_filter} \n Seat Preference: {seat_preference}")
     print(f" Thank you for choosing Redline Airlines! Enjoy your flight {name}!")
 
 # Meet Koradia
+# Concept: Implementation of a magic method __str__().
 
 def __str__(self):
+    """The informal string representation of the Passenger object detailing the 
+    flight information to the end user.
+
+    Returns:
+        str: Returns the string representation of the passenger object and its attributes. 
     """
-    """
-    return f'Name: {self.name}, DOB: {self.dob}, Accomodation: {self.accomodation}, Destination: {self.destination}, Direct-Flight: {self.direct_flight}, Class: {self.service_class}, Price: {self.price}, Preference: {self.preference}'   
+    return f'Name: {self.name}, DOB: {self.dob}, Accommodation: {self.accommodation}, Destination: {self.destination}, Direct-Flight: {self.direct_flight}, Class: {self.service_class}, Price: {self.price}, Preference: {self.preference}'   
 
 if __name__ == "__main__":
     boarding_ticket()
