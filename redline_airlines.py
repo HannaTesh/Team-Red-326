@@ -94,6 +94,7 @@ class Passenger():
         
         with open('welcome.txt', 'r+', encoding= "utf-8") as text_file:
             contents = text_file.read().replace('customer_name', str(new_name))
+            print("========================================================================================================\n")
             print(contents)
     
 # Andrew Liu
@@ -116,8 +117,10 @@ class Passenger():
         
         if age >= 14:
             print(f"The user is {age} years old, they are able to purchase a ticket")
+            print("========================================================================================================\n")
         else:
             print(f"The user is {age} years old, they are too young to purchase a ticket")
+            print("========================================================================================================\n")
             
 # Hanna Teshome
 # Concept: Implementation of a custom list sorting with a key function; 
@@ -138,10 +141,12 @@ class Passenger():
             accommodated_seats["seat_prices"] = accommodated_seats["seat_prices"].apply(lambda x: x + 30)
             print(f"Because you have decided to purchase an accomodation seat, there is a 30 dollar increase your ticket price")
             print(accommodated_seats)
+            print("========================================================================================================\n")
             self.accommodated_seats = accommodated_seats
         else:
             accommodated_seats = seat_data[["seat_id", "accommodation", "destination", "direct_flight", "service_class", "seat_prices", "seat_preference"]]
             print(accommodated_seats)
+            print("========================================================================================================\n")
             self.accommodated_seats = accommodated_seats
 
 # Meet Koradia
@@ -161,6 +166,7 @@ class Passenger():
             true_seats = seat_data[(seat_data["destination"] == 'France')]
             destination_seats = pd.merge(self.accommodated_seats, true_seats[["seat_id", "destination"]], how="inner")
             print(destination_seats)
+            print("========================================================================================================\n")
             self.destination_seats = destination_seats
             
         elif new_location == 'Argentina':
@@ -168,6 +174,7 @@ class Passenger():
             true_seats = seat_data[(seat_data["destination"] == 'Argentina')]
             destination_seats = pd.merge(seats, true_seats[["seat_id", "destination"]], how="inner")
             print(destination_seats)
+            print("========================================================================================================\n")
             self.destination_seats = destination_seats
             
         elif new_location == 'Croatia':
@@ -175,6 +182,7 @@ class Passenger():
             true_seats = seat_data[(seat_data["destination"] == 'Croatia')]
             destination_seats = pd.merge(seats, true_seats[["seat_id", "destination"]], how="inner")
             print(destination_seats)
+            print("========================================================================================================\n")
             self.destination_seats = destination_seats
             
         elif new_location == 'Morocco':
@@ -182,11 +190,13 @@ class Passenger():
             true_seats = seat_data[(seat_data["destination"] == 'Morocco')]
             destination_seats = pd.merge(seats, true_seats[["seat_id", "destination"]], how="inner")
             print(destination_seats)
+            print("========================================================================================================\n")
             self.destination_seats = destination_seats
             
         else:
             seats = self.accommodated_seats
             print(destination_seats)
+            print("========================================================================================================\n")
             self.destination_seats = destination_seats
 
         destcount = seat_data["destination"].value_counts()
@@ -211,6 +221,7 @@ class Passenger():
             true_direct = seat_data[(seat_data["direct_flight"] == True)]
             direct_seats = pd.merge(seats, true_direct[["seat_id", "direct_flight"]], how="inner")
             print(direct_seats)
+            print("========================================================================================================\n")
             self.direct_seats = direct_seats
             
         else:
@@ -218,6 +229,7 @@ class Passenger():
             true_direct = seat_data[(seat_data["direct_flight"] == False)]
             direct_seats = pd.merge(seats, true_direct[["seat_id", "direct_flight"]], how="inner")
             print(direct_seats)
+            print("========================================================================================================\n")
             self.direct_seats = direct_seats
             
 # Patrick Polglase
@@ -236,6 +248,7 @@ class Passenger():
         placement_seats = pd.merge(seats, preferred_placement[["seat_id", "service_class"]], how="inner") 
         print(placement_seats)
         print(f"Here are all the seats available based off your selected placement: {placement}")
+        print("========================================================================================================\n")
         self.placement_seats = placement_seats
             
 # Hanna Teshome 
@@ -262,18 +275,21 @@ class Passenger():
             priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
             merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class']], how='inner')
             print(merged_seats)
+            print("========================================================================================================\n")
             self.merged_seats = merged_seats
         elif price < 360:
             seats = self.placement_seats
             priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
             merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class']], how='inner')
             print(merged_seats)
+            print("========================================================================================================\n")
             self.merged_seats = merged_seats
         elif price < 1400:
             seats = self.placement_seats
             priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
             merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class']], how='inner')
             print(merged_seats)
+            print("========================================================================================================\n")
             self.merged_seats = merged_seats
         else:
             merged_seats = self.placement_seats
@@ -281,6 +297,7 @@ class Passenger():
             self.merged_seats = merged_seats
 
             print("Try Spirit Airlines") if price < 55 else print("Here are seats within your budget!")
+            print("========================================================================================================\n")
 
     
 # Meet Koradia
@@ -302,6 +319,7 @@ class Passenger():
             seat_location = pd.merge(seats, seat_preference[["seat_id", "seat_preference"]], how="inner")
             print(seat_location)
             print("Here are all the middle seats available")
+            print("========================================================================================================\n")
             self.seat_location = seat_location
             
         if new_preference == "A":
@@ -310,6 +328,7 @@ class Passenger():
             seat_location = pd.merge(seats, seat_preference[["seat_id", "seat_preference"]], how="inner")
             print(seat_location)
             print("Here are all the middle seats available")
+            print("========================================================================================================\n")
             self.seat_location = seat_location
             
         if new_preference == "W":
@@ -318,6 +337,7 @@ class Passenger():
             seat_location = pd.merge(seats, seat_preference[["seat_id", "seat_preference"]], how="inner")
             print(seat_location)
             print("Here are all the middle seats available")
+            print("========================================================================================================\n")
             self.seat_location = seat_location
 
         seatcount = seat_data["seat_preference"].value_counts()
@@ -339,6 +359,7 @@ def boarding_ticket():
 
     passenger = Passenger()
 
+    print("========================================================================================================\n")
     name = input("what is your name \n")
     passenger.custom_greeting(name)
 
@@ -367,9 +388,11 @@ def boarding_ticket():
 
     name, dob,accommodation,destination,direct_flight,seat_choice,price_filter,seat_preference = boarding_ticket
 
+    print("========================================================================================================\n")
     print("Boarding Ticket Information")
-    print(f" NAME: {name} \n DOB: {dob} \n Accommodation: {accommodation} \n Destination: {destination} \n Direct Flight: {direct_flight} \n Seat Choice: {seat_choice} \n Price: {price_filter} \n Seat Preference: {seat_preference}")
+    print(f" NAME: {name} \n DOB: {dob} \n ACCOMMODATION: {accommodation} \n DESTINATION: {destination} \n DIRECT FLIGHT: {direct_flight} \n SEAT CHOICE: {seat_choice} \n PRICE: ${price_filter} \n SEAT PREFERENCE: {seat_preference}")
     print(f" Thank you for choosing Redline Airlines! Enjoy your flight {name}!")
+    print("========================================================================================================\n")
 
 # Meet Koradia
 # Concept: Implementation of a magic method __str__().
