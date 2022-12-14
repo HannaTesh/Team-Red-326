@@ -126,43 +126,40 @@ class Passenger():
         print("Here are all the coach seats available")
         self.placement_seats = placement_seats
             
-         
+       #Hanna Teshome  
     def price_filter(self, new_price):
-        
-        # Clean up
-        
+
         seat_data = pd.read_csv("flight_seating.csv")
-        
+
         price = int(new_price)
-        
-        if price < 69:
+
+        if price < 55:
             print("There are no available seats within that price range")
         elif price < 100:
             seats = self.placement_seats
             priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
             merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class']], how='inner')
-            print("Here are seats within your budget.")
             print(merged_seats)
             self.merged_seats = merged_seats
         elif price < 360:
             seats = self.placement_seats
             priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
             merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class']], how='inner')
-            print("Here are seats within your budget.")
             print(merged_seats)
             self.merged_seats = merged_seats
         elif price < 1400:
             seats = self.placement_seats
             priced_seats = seat_data[(seat_data['seat_prices'] <= price)]
             merged_seats = pd.merge(seats, priced_seats[['seat_id', 'seat_prices', 'service_class']], how='inner')
-            print("Here are seats within your budget.")
             print(merged_seats)
             self.merged_seats = merged_seats
         else:
             merged_seats = self.placement_seats
-            print("All seats are within your budget")
             print(merged_seats)
             self.merged_seats = merged_seats
+
+            print("Try Spirit Airlines") if price < 55 else print("Here are seats within your budget!")
+
     
 # Meet Koradia
 
