@@ -1,6 +1,7 @@
-
 import re
 import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
 
 class Passenger():
     
@@ -55,6 +56,8 @@ class Passenger():
             accommodated_seats = seat_data[["seat_id", "accommodation", "destination", "direct_flight", "service_class", "seat_prices", "seat_preference"]]
             print(accommodated_seats)
             self.accommodated_seats = accommodated_seats
+
+# Meet Koradia
             
     def destination_filter(self, new_location):
         
@@ -92,6 +95,11 @@ class Passenger():
             seats = self.accommodated_seats
             print(destination_seats)
             self.destination_seats = destination_seats
+
+        seat_data = pd.read_csv("flight_seating.csv")
+        destcount = seat_data["destination"].value_counts()
+        plt.pie(destcount, labels = destcount.index)
+        plt.show()
             
             
     def direct_flight_filter(self, direct):
@@ -161,7 +169,8 @@ class Passenger():
             print(merged_seats)
             self.merged_seats = merged_seats
     
-    
+# Meet Koradia
+
     def seat_preference_filter(self, new_preference):
         
         seat_data = pd.read_csv("flight_seating.csv")
@@ -189,7 +198,10 @@ class Passenger():
             print(seat_location)
             print("Here are all the middle seats available")
             self.seat_location = seat_location
-        
+
+        seatcount = seat_data["seat_preference"].value_counts()
+        plt.pie(seatcount, labels = seatcount.index)
+        plt.show() 
                  
 def demo():
     
@@ -210,6 +222,11 @@ def demo():
     passenger.price_filter(input("What's the most you're willing to spend on this ticket? \n"))
     
     passenger.seat_preference_filter(input("Would you like a middle, aisle, or window seat? Middle(M), Aisle(A), Window(W). Asile is reserved for accomodations and has a higher price point \n"))
-    
+
+# Meet Koradia
+
+def __repr__(self):
+    return f'Name: {self.name}, DOB: {self.dob}, Accomodation: {self.accomodation}, Destination: {self.destination}, Direct-Flight: {self.direct_flight}, Class: {self.service_class}, Price: {self.price}, Preference: {self.preference}'   
+
 if __name__ == "__main__":
     demo()
