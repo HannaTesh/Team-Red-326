@@ -8,11 +8,12 @@ The purpose Of our program is to let the user choose a desired Seat on the airli
 ### How to run our Program:
 The program narrows down to a user's preferred seating choice by filtering through a series of questions.
 
-The first question asked by program is user's name.
-The user needs to input their their name.
+The program first asks for the user's name.
+The user then needs to input their their name.
 
-Minimum age to book a seat is 14 years or older which will be the second question asked by the program.
-The user needs to input their date of birth in the format YYYYMMDD.
+The user then needs to enter their date of birth in the format: YYYYMMDD.
+The program then uses a regular expression to determine the user's age.
+In order to purchase a ticker, the user must be 14 years old or more, if they are not the program will stop
 
 The next question asked will be if the user needs accommodations.
 The User will address this question true if they need accommodations or false if they do not need accommodations.
