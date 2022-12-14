@@ -1,7 +1,7 @@
 # Redline Airlines Airplane Bording Ticket and Reservation
 ## Team Red INST326 0101
 
-###Purpose:
+### Purpose:
 
 The purpose Of our program is to let the user choose a desired Seat on the airlines.
 
