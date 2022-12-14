@@ -17,17 +17,12 @@ class Passenger():
         self.price = price
         self.preference = preference
         
-    #def custom_greeting(self, user):
-        #def greeting(name)
-        #This method will: 
-        #read through a text file containing a greeting message to our air line, take in a user's inputted name, 
-        #then using regex will insert that name to a blank spot within the text file,
-        #then print out the text with the user's name
+    #Patrick: with statement
+    def custom_greeting(self, new_name):
         
-        #str_user = str(user)
-        #with open('welcome.txt', 'r+', encoding= "utf-8") as text_file:
-            #contents = text_file.read().replace(f'customer_name', {str_user})
-        #print(contents)
+        with open('welcome.txt', 'r+', encoding= "utf-8") as text_file:
+            contents = text_file.read().replace('customer_name', str(new_name))
+            print(contents)
     
     #Andrew Liu 
     def age_filter(self, new_dob):
