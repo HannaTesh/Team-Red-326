@@ -42,4 +42,25 @@ Once every user input decision has been made, every choice is compiled into a *'
 ## Team Contributions:
 ### Tega Ojegun
 Methods/Functions: **__init__() & boarding_ticket()**
+
 Concepts: **Implementation of optional parameters & Implementation of sequence unpacking**
+
+### Patrick Polglase
+Methods/Functions: **custom_greeting() & seat_choice()**
+
+Concepts: **Implementation of with statement & Implementation of an f string**
+
+### Andrew Liu
+Methods/Functions: **age_filter() & direct_flight_filter()**
+
+Concepts: **Implementation of regular expression & Implementation of merge operation using Pandas dataframe**
+
+### Hanna Teshome
+Methods/Functions: **accomodation_filter() & price_filter()**
+
+Concepts: **Implementation of a custom list sorting with a key function (lambda expression) & Implementation of a conditional expression**
+
+### Meet Koradia
+Methods/Functions: **destination_filter(), seat_preference_filter() & __str__()**
+
+Concepts: **Implementation of data visualization using pyplot & Implementation of a magic method __str__()**
